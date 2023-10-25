@@ -33,16 +33,16 @@ class Task(models.Model):
     )
     creator = models.ForeignKey(
         User,
-        verbose_name=_("creator_id"),
-        related_name="creator_id",
+        verbose_name=_("task_creator_id"),
+        related_name="task_creator_id",
         on_delete=models.SET_NULL,
         null=True,
         blank=False,
     )
     tasker = models.ForeignKey(
         User,
-        verbose_name=_("tasker_id"),
-        related_name="tasker_id",
+        verbose_name=_("task_creator_id"),
+        related_name="task_tasker_id",
         on_delete=models.SET_NULL,
         null=True,
         blank=False,

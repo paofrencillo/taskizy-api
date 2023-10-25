@@ -24,7 +24,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -203,3 +203,11 @@ DJOSER = {
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }
+
+# Cloudinary settings
+CLOUDINARY_URL = env("CLOUDINARY_URL")
+cloudinary.config(
+    cloud_name="YOUR_CLOUD_NAME",
+    api_key="YOUR_API_KEY",
+    api_secret="YOUR_API_SECRET",
+)
