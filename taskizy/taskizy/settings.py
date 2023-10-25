@@ -9,22 +9,22 @@ import cloudinary.uploader
 import cloudinary.api
 
 
-env = environ.Env(DEBUG=(bool, False))
+# env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Read the .env file
-environ.Env.read_env(BASE_DIR / ".env")
+# environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.environ("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -37,13 +37,13 @@ CORS_ALLOWED_ORIGINS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
-EMAIL_PORT = env("EMAIL_PORT")
-DOMAIN = env("DOMAIN")
-SITE_NAME = env("SITE_NAME")
+EMAIL_HOST = os.environ("EMAIL_HOST")
+EMAIL_HOST_USER = os.environ("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.environ("DEFAULT_FROM_EMAIL")
+EMAIL_PORT = os.environ("EMAIL_PORT")
+DOMAIN = os.environ("DOMAIN")
+SITE_NAME = os.environ("SITE_NAME")
 
 
 # Application definition
@@ -106,11 +106,11 @@ WSGI_APPLICATION = "taskizy.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("PGDATABASE"),
-        "USER": env("PGUSER"),
-        "PASSWORD": env("PGPASSWORD"),
-        "HOST": env("PGHOST"),
-        "PORT": env("PGPORT"),
+        "NAME": os.environ("PGDATABASE"),
+        "USER": os.environ("PGUSER"),
+        "PASSWORD": os.environ("PGPASSWORD"),
+        "HOST": os.environ("PGHOST"),
+        "PORT": os.environ("PGPORT"),
     }
 }
 
@@ -207,7 +207,7 @@ DJOSER = {
 # Cloudinary settings
 CLOUDINARY_URL = env("CLOUDINARY_URL")
 cloudinary.config(
-    cloud_name="CLOUDINARY_CLOUD_NAME",
-    api_key="CLOUDINARY_API_KEY",
-    api_secret="CLOUDINARY_API_SECRET",
+    cloud_name=os.environ("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ("CLOUDINARY_API_KEY"),
+    api_secret=os.environ("CLOUDINARY_API_SECRET"),
 )
