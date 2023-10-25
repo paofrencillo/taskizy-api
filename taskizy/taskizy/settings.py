@@ -70,6 +70,8 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "cloudinary_storage",
+    "cloudinary",
     # Internal apps
     "users",
     "rooms",
@@ -168,6 +170,9 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 # URL used to access the media
 MEDIA_URL = "/media/"
+
+# File and Image Storage Couldinary
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
