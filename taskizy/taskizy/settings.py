@@ -32,8 +32,14 @@ ALLOWED_HOSTS = ["taskizy-api-production.up.railway.app", "127.0.0.1"]
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:5173",
-    "https://taskizy-api-production.up.railway.app/",
 ]
+
+# Edit the following line and place your railway URL, and your custom URL in the array.
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.up.railway.app",
+]
+
 
 # Email Setup
 
