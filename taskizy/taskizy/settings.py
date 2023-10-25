@@ -24,26 +24,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["taskizy-api-production.up.railway.app", "127.0.0.1"]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5173/",
-    "http://localhost:5173/",
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+    "https://*.up.railway.app",
 ]
 
 # Email Setup
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
-EMAIL_HOST = os.environ("EMAIL_HOST")
-EMAIL_HOST_USER = os.environ("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = os.environ("DEFAULT_FROM_EMAIL")
-EMAIL_PORT = os.environ("EMAIL_PORT")
-DOMAIN = os.environ("DOMAIN")
-SITE_NAME = os.environ("SITE_NAME")
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
+EMAIL_PORT = os.environ["EMAIL_PORT"]
+DOMAIN = os.environ["DOMAIN"]
+SITE_NAME = os.environ["SITE_NAME"]
 
 
 # Application definition
@@ -106,11 +107,11 @@ WSGI_APPLICATION = "taskizy.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ("PGDATABASE"),
-        "USER": os.environ("PGUSER"),
-        "PASSWORD": os.environ("PGPASSWORD"),
-        "HOST": os.environ("PGHOST"),
-        "PORT": os.environ("PGPORT"),
+        "NAME": os.environ["PGDATABASE"],
+        "USER": os.environ["PGUSER"],
+        "PASSWORD": os.environ["PGPASSWORD"],
+        "HOST": os.environ["PGHOST"],
+        "PORT": os.environ["PGPORT"],
     }
 }
 
@@ -205,9 +206,9 @@ DJOSER = {
 }
 
 # Cloudinary settings
-CLOUDINARY_URL = env("CLOUDINARY_URL")
+CLOUDINARY_URL = os.environ["CLOUDINARY_URL"]
 cloudinary.config(
-    cloud_name=os.environ("CLOUDINARY_CLOUD_NAME"),
-    api_key=os.environ("CLOUDINARY_API_KEY"),
-    api_secret=os.environ("CLOUDINARY_API_SECRET"),
+    cloud_name=os.environ["CLOUDINARY_CLOUD_NAME"],
+    api_key=os.environ["CLOUDINARY_API_KEY"],
+    api_secret=os.environ["CLOUDINARY_API_SECRET"],
 )
