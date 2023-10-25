@@ -70,8 +70,8 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    "cloudinary_storage",
     "cloudinary",
+    "cloudinary_storage",
     # Internal apps
     "users",
     "rooms",
@@ -171,8 +171,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 # URL used to access the media
 MEDIA_URL = "/media/"
 
-# File and Image Storage Couldinary
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -223,8 +221,11 @@ DJOSER = {
 
 # Cloudinary settings
 CLOUDINARY_URL = os.environ["CLOUDINARY_URL"]
-cloudinary.config(
-    cloud_name=os.environ["CLOUDINARY_CLOUD_NAME"],
-    api_key=os.environ["CLOUDINARY_API_KEY"],
-    api_secret=os.environ["CLOUDINARY_API_SECRET"],
-)
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ["CLOUDINARY_CLOUD_NAME"],
+    "API_KEY": os.environ["CLOUDINARY_API_KEY"],
+    "API_SECRET": os.environ["CLOUDINARY_API_SECRET"],
+}
+
+# File and Image Storage Couldinary
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"

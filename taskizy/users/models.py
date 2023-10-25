@@ -2,11 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
-from cloudinary.models import CloudinaryField
-
-
-def upload_to(instance, filename):
-    return "profile_images/{filename}".format(filename=filename)
 
 
 class User(AbstractUser, PermissionsMixin):
@@ -17,7 +12,7 @@ class User(AbstractUser, PermissionsMixin):
     role = models.CharField(
         _("Role"), max_length=50, default="Member", blank=True, null=True
     )
-    user_image = CloudinaryField("image")
+    user_image = models.ImageField(upload_to="profile_images/", blank=True)
 
     objects = CustomUserManager()
 
