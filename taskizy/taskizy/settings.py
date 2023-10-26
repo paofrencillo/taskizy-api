@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ["taskizy-api.up.railway.app", "127.0.0.1"]
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:5173",
-    "https://paofrencillo.github.io/taskizy/",
 ]
 
 # Edit the following line and place your railway URL, and your custom URL in the array.
