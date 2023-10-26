@@ -30,7 +30,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["taskizy-api.up.railway.app", "127.0.0.1"]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://taskizy.up.railway.app",
+    "https://taskizy.vercel.app",
     "http://127.0.0.1:5173",
     "http://localhost:5173",
 ]
