@@ -27,7 +27,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["taskizy-api-production.up.railway.app", "127.0.0.1"]
+ALLOWED_HOSTS = ["taskizy-api.up.railway.app", "127.0.0.1"]
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
