@@ -33,6 +33,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://taskizy.vercel.app",
     "http://127.0.0.1:5173",
     "http://localhost:5173",
+    "http://localhost:4173",
 ]
 
 # Edit the following line and place your railway URL, and your custom URL in the array.
