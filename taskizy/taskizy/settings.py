@@ -4,11 +4,6 @@ from datetime import timedelta
 # import environ
 import os
 
-# Cloudinary
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
 
 # env = environ.Env(DEBUG=(bool, False))
 
