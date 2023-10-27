@@ -4,10 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
 
 
-def upload_to(instance, filename):
-    return "profile_images/{filename}".format(filename=filename)
-
-
 class User(AbstractUser, PermissionsMixin):
     username = None
     first_name = models.CharField(_("First Name"), max_length=100)
@@ -16,9 +12,7 @@ class User(AbstractUser, PermissionsMixin):
     role = models.CharField(
         _("Role"), max_length=50, default="Member", blank=True, null=True
     )
-    user_image = models.ImageField(
-        _("User Image"), upload_to=upload_to, blank=True, null=True
-    )
+    user_image = models.ImageField(upload_to="profile_images/", blank=True)
 
     objects = CustomUserManager()
 

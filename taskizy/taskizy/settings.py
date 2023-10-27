@@ -1,44 +1,58 @@
 from pathlib import Path
 from datetime import timedelta
-import environ
+
+# import environ
 import os
 
 
-env = environ.Env(DEBUG=(bool, False))
+# env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Read the .env file
-environ.Env.read_env(BASE_DIR / ".env")
+# environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "taskizy-api.up.railway.app",
+    # "127.0.0.1",
+]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5173",
-    "http://localhost:5173",
+    "https://taskizy.vercel.app",
+    # "http://127.0.0.1:5173",
+    # "http://localhost:5173",
+    # "http://localhost:4173",
 ]
+
+# Edit the following line and place your railway URL, and your custom URL in the array.
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.up.railway.app/",
+]
+
 
 # Email Setup
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_TLS = True
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
-EMAIL_PORT = env("EMAIL_PORT")
-DOMAIN = env("DOMAIN")
-SITE_NAME = env("SITE_NAME")
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
+EMAIL_PORT = os.environ["EMAIL_PORT"]
+DOMAIN = os.environ["DOMAIN"]
+SITE_NAME = os.environ["SITE_NAME"]
 
 
 # Application definition
@@ -57,6 +71,8 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "cloudinary",
+    "cloudinary_storage",
     # Internal apps
     "users",
     "rooms",
@@ -66,6 +82,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Whitenoise for static files
     "corsheaders.middleware.CorsMiddleware",  # CORS Header middleware
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -101,11 +118,11 @@ WSGI_APPLICATION = "taskizy.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("PGDATABASE"),
-        "USER": env("PGUSER"),
-        "PASSWORD": env("PGPASSWORD"),
-        "HOST": env("PGHOST"),
-        "PORT": env("PGPORT"),
+        "NAME": os.environ["PGDATABASE"],
+        "USER": os.environ["PGUSER"],
+        "PASSWORD": os.environ["PGPASSWORD"],
+        "HOST": os.environ["PGHOST"],
+        "PORT": os.environ["PGPORT"],
     }
 }
 
@@ -145,12 +162,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 
 # Actual directory user files go to
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 # URL used to access the media
 MEDIA_URL = "/media/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -198,3 +219,14 @@ DJOSER = {
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }
+
+# Cloudinary settings
+CLOUDINARY_URL = os.environ["CLOUDINARY_URL"]
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ["CLOUDINARY_CLOUD_NAME"],
+    "API_KEY": os.environ["CLOUDINARY_API_KEY"],
+    "API_SECRET": os.environ["CLOUDINARY_API_SECRET"],
+}
+
+# File and Image Storage Couldinary
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
