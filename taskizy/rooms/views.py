@@ -90,7 +90,19 @@ class RoomView(RetrieveUpdateDestroyAPIView):
         except Room.DoesNotExist:
             return None
 
+    def check_if_member(self, request):
+        room = self.get_object()
+        user = request.user
+
+        check_member = RoomMember.objects.filter(room=room, room_member=user).count()
+        return False if check_member == 0 else True
+
     def retrieve(self, request, *args, **kwargs):
+        is_member = self.check_if_member(request)
+
+        if not is_member:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
         instance = self.get_object()
 
         if instance is None:
