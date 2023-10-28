@@ -103,6 +103,8 @@ class RoomView(RetrieveUpdateDestroyAPIView):
         if not is_member:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+        instance = self.get_object()
+
         if instance is None:
             return Response(
                 data="Room does not exists.",
